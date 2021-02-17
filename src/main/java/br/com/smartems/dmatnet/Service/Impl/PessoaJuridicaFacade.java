@@ -3,7 +3,8 @@ package br.com.smartems.dmatnet.Service.Impl;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 import br.com.smartems.dmatnet.DAO.PessoaJuridicaDAO;
 import br.com.smartems.dmatnet.Service.PessoaJuridicaServiceLocal;
@@ -14,10 +15,14 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaFAP;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaFoto;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaLogotipo;
+import java.io.Serializable;
 
-@Stateless
-public class PessoaJuridicaFacade implements PessoaJuridicaServiceLocal {
+@Named
+@SessionScoped
+public class PessoaJuridicaFacade implements Serializable, PessoaJuridicaServiceLocal {
 
+	private static final long serialVersionUID = 1L;
+	
 	@EJB
 	private PessoaJuridicaDAO pessoaJuridicaEAO;
 

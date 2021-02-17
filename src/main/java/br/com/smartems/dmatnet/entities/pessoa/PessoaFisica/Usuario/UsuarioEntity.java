@@ -14,6 +14,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisicaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaGrupoEntity;
@@ -39,6 +41,7 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 	@JoinColumn(name="usuarioGrupo_ID")
 	private UsuarioGrupoEntity grupo;
 	
+	@JsonBackReference("usuarios")
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="tbl_usuarioEmpresas_joinTable",
 		joinColumns=@JoinColumn(name="usuario_ID"),

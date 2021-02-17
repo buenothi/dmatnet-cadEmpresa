@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.smartems.dmatnet.entities.LocalTrabalho.LocalTrabalhoEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Trabalhador.TrabalhadorEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
@@ -47,6 +49,7 @@ public class EmpresaEntity extends AbstractPessoaJuridicaEntity implements Seria
 	@JoinColumn(name = "empresa_ID")
 	private Set<TrabalhadorEntity> trabalhadores;
 
+	@JsonBackReference("empresasGerenciadas")
 	@ManyToMany(mappedBy = "empresasGerenciadas", fetch = FetchType.EAGER)
 	private List<UsuarioEntity> usuarios;
 

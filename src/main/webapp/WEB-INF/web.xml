@@ -5,21 +5,8 @@
 	version="2.5">
 	<display-name>dmatnet-cadEmpresa</display-name>
 
-	<listener>
-		<listener-class>
-			org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
-	</listener>
-
-	<!-- ** INSERT YOUR LISTENERS HERE!!!! -->
-
-	<servlet>
-		<servlet-name>Resteasy</servlet-name>
-		<servlet-class>
-			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>Resteasy</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
 </web-app>
