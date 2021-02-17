@@ -2,12 +2,13 @@ package br.com.smartems.dmatnet.DAO;
 
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
-@SuppressWarnings("unchecked")
+@Dependent
 public abstract class AbstractDAO <T, PK> implements IAbstractDAO<T, PK>{
 
 	@PersistenceContext(unitName = "dmatnet-pu")
@@ -15,7 +16,7 @@ public abstract class AbstractDAO <T, PK> implements IAbstractDAO<T, PK>{
 	
 	private Class<T> persistentClass;
 
-	public AbstractDAO(Class<T> entityClass) {
+	protected AbstractDAO(Class<T> entityClass) {
 		this.persistentClass = entityClass;
 	}
 
@@ -27,6 +28,7 @@ public abstract class AbstractDAO <T, PK> implements IAbstractDAO<T, PK>{
 		entityManager.persist(entity);
 	}
 
+	@SuppressWarnings("unchecked")
 	public T update(T entity) throws NoResultException {
 		Object c = this.entityManager.merge(entity);
 		entityManager.flush();
@@ -38,9 +40,9 @@ public abstract class AbstractDAO <T, PK> implements IAbstractDAO<T, PK>{
 		entityManager.remove(c);
 	}
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings("unchecked")
     public List<T> findAll() {
-        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+		CriteriaQuery<T> cq = (CriteriaQuery<T>) entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(persistentClass));
         return entityManager.createQuery(cq).getResultList();
     }

@@ -3,11 +3,11 @@ package br.com.smartems.dmatnet.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
-@Local
-@Stateless
+@Named
+@RequestScoped
 public class CriptografiaString {
 
 	public String obterHashString(String senha) {

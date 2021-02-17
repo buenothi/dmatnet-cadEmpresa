@@ -1,13 +1,13 @@
 package br.com.smartems.dmatnet.Service.Impl;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.smartems.dmatnet.DAO.PessoaJuridicaDAO;
-import br.com.smartems.dmatnet.Service.PessoaJuridicaServiceLocal;
 import br.com.smartems.dmatnet.entities.pessoa.EnderecoEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaCadastroEntity;
@@ -15,46 +15,39 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaFAP;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaFoto;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaLogotipo;
-import java.io.Serializable;
 
 @Named
-@SessionScoped
-public class PessoaJuridicaFacade implements Serializable, PessoaJuridicaServiceLocal {
+@RequestScoped
+public class PessoaJuridicaFacade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@EJB
+	@Inject
 	private PessoaJuridicaDAO pessoaJuridicaEAO;
 
 	public PessoaJuridicaFacade() {
 	}
 
-	@Override
 	public EmpresaEntity read(long pk) {
 		return pessoaJuridicaEAO.read(pk);
 	}
 
-	@Override
 	public void create(EmpresaEntity entity) {
 		pessoaJuridicaEAO.create(entity);
 	}
 
-	@Override
 	public EmpresaEntity update(EmpresaEntity entity) {
 		return pessoaJuridicaEAO.update(entity);
 	}
 
-	@Override
 	public void delete(EmpresaEntity entity) {
 		pessoaJuridicaEAO.delete(entity);
 	}
 
-	@Override
 	public List<EmpresaEntity> findAll() {
 		return pessoaJuridicaEAO.findAll();
 	}
 
-	@Override
 	public List<EmpresaEntity> listarEmpresas(UsuarioEntity usuarioLogado) {
 		return pessoaJuridicaEAO.listarEmpresas(usuarioLogado);
 	}

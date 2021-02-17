@@ -41,7 +41,7 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 	@JoinColumn(name="usuarioGrupo_ID")
 	private UsuarioGrupoEntity grupo;
 	
-	@JsonBackReference("usuarios")
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="tbl_usuarioEmpresas_joinTable",
 		joinColumns=@JoinColumn(name="usuario_ID"),

@@ -2,40 +2,36 @@ package br.com.smartems.dmatnet.Service.Impl;
 
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.smartems.dmatnet.DAO.LogradouroDAO;
-import br.com.smartems.dmatnet.Service.LogradourosServiceLocal;
 import br.com.smartems.dmatnet.entities.pessoa.EnderecoTipoEntity;
 
-@Stateless
-public class LogradourosFacade implements LogradourosServiceLocal {
+@Named
+@RequestScoped
+public class LogradourosFacade {
 
-	@EJB
+	@Inject
 	private LogradouroDAO logradourosEAO;
-	
-	@Override
+
 	public EnderecoTipoEntity read(long pk) {
 		return logradourosEAO.read(pk);
 	}
 
-	@Override
 	public void create(EnderecoTipoEntity entity) {
 		logradourosEAO.create(entity);
 	}
 
-	@Override
 	public EnderecoTipoEntity update(EnderecoTipoEntity entity) {
 		return logradourosEAO.update(entity);
 	}
 
-	@Override
 	public void delete(EnderecoTipoEntity entity) {
 		logradourosEAO.delete(entity);
 	}
 
-	@Override
 	public List<EnderecoTipoEntity> findAll() {
 		return logradourosEAO.findAll();
 	}

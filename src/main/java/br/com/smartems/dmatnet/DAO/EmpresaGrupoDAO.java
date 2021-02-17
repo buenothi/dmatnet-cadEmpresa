@@ -3,8 +3,8 @@ package br.com.smartems.dmatnet.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -13,8 +13,8 @@ import javax.persistence.Query;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaGrupoEntity;
 
-@Stateless
-@Local
+@Typed(EmpresaGrupoDAO.class)
+@RequestScoped
 public class EmpresaGrupoDAO extends AbstractDAO<EmpresaGrupoEntity, Long>{
 
 	@PersistenceContext(unitName = "dmatnet-pu")

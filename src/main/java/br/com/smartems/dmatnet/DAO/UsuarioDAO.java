@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -22,14 +22,14 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntit
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 import br.com.smartems.dmatnet.util.CriptografiaString;
 
-@Stateless
-@Local
+@Typed(UsuarioDAO.class)
+@RequestScoped
 public class UsuarioDAO extends AbstractDAO<UsuarioEntity, Long> {
 
 	@PersistenceContext(unitName = "dmatnet-pu")
 	private EntityManager entityManager;
 
-	@EJB
+	@Inject
 	private CriptografiaString cs;
 	private UsuarioEntity usuario;
 	private List<UsuarioEntity> usuarios;

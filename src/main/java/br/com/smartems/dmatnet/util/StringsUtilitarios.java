@@ -1,10 +1,10 @@
 package br.com.smartems.dmatnet.util;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
-@Local
-@Stateless
+@Named
+@RequestScoped
 public class StringsUtilitarios {
 
 	public String formatarTextoParaLeitura(String value) {

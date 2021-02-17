@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -21,8 +21,8 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Trabalhador.Trabalha
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 
-@Stateless
-@Local
+@Typed(TrabalhadorDAO.class)
+@RequestScoped
 public class TrabalhadorDAO extends AbstractDAO<TrabalhadorEntity, Long> {
 
 	@PersistenceContext(unitName = "dmatnet-pu")
@@ -32,7 +32,7 @@ public class TrabalhadorDAO extends AbstractDAO<TrabalhadorEntity, Long> {
 		super(TrabalhadorEntity.class);
 	}
 
-	@EJB
+	@Inject
 	private PessoaJuridicaDAO pessoaJuridicaEAO;
 
 	public void salvarNovoTrabalhador(UsuarioEntity usuario, EmpresaEntity empresaSelecionada,

@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -24,8 +24,8 @@ import br.com.smartems.dmatnet.util.ReportUtil;
 import br.com.smartems.dmatnet.util.filtrosCollection.Filter;
 import br.com.smartems.dmatnet.util.filtrosCollection.FiltroEmpresa;
 
-@Stateless
-@Local
+@Typed(PessoaJuridicaDAO.class)
+@RequestScoped
 public class PessoaJuridicaDAO extends AbstractDAO<EmpresaEntity, Long> {
 
 	@PersistenceContext(unitName = "dmatnet-pu")
@@ -35,7 +35,7 @@ public class PessoaJuridicaDAO extends AbstractDAO<EmpresaEntity, Long> {
 		super(EmpresaEntity.class);
 	}
 
-	@EJB
+	@Inject
 	private ReportUtil reportUtil;
 
 	@SuppressWarnings("unchecked")

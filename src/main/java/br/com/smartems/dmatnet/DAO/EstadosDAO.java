@@ -2,8 +2,8 @@ package br.com.smartems.dmatnet.DAO;
 
 import java.util.List;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -11,8 +11,8 @@ import javax.persistence.Query;
 import br.com.smartems.dmatnet.entities.cidades.CidadeEntity;
 import br.com.smartems.dmatnet.entities.cidades.EstadoEntity;
 
-@Stateless
-@Local
+@Typed(EstadosDAO.class)
+@RequestScoped
 public class EstadosDAO extends AbstractDAO<EstadoEntity, Long>{
 
 	@PersistenceContext(unitName = "dmatnet-pu")

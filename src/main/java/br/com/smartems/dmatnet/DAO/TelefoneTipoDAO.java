@@ -1,14 +1,14 @@
 package br.com.smartems.dmatnet.DAO;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.com.smartems.dmatnet.entities.pessoa.TelefoneTipoEntity;
 
-@Stateless
-@Local
+@Typed(TelefoneTipoDAO.class)
+@RequestScoped
 public class TelefoneTipoDAO extends AbstractDAO<TelefoneTipoEntity, Long> {
 
 	@PersistenceContext(unitName = "dmatnet-pu")
