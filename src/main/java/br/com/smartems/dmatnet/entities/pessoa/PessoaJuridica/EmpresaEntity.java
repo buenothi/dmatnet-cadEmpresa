@@ -14,13 +14,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.smartems.dmatnet.entities.LocalTrabalho.LocalTrabalhoEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Trabalhador.TrabalhadorEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 
+@XmlRootElement(name = "empresa")
 @Entity
 @Table(name = "tbl_Empresa")
 @NamedQueries({
@@ -28,41 +31,45 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntit
 public class EmpresaEntity extends AbstractPessoaJuridicaEntity implements Serializable {
 
 	private long codESocialEmpresa;
-
-	@JsonIgnore
+	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "grupo_ID")
 	private EmpresaGrupoEntity grupo;
 	
-	@JsonIgnore
+	@JsonManagedReference
+	@XmlElement(name = "cadastros")
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.LAZY)
+			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "empresa_ID")
 	private Set<EmpresaCadastroEntity> cadastros;
 
-	@JsonIgnore
+	@JsonManagedReference
+	@XmlElement(name = "locais")
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.LAZY)
+			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "empresa_ID")
 	private Set<LocalTrabalhoEntity> locais;
 	
-	@JsonIgnore
+	@JsonManagedReference
+	@XmlElement(name = "trabalhadores")
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.LAZY)
+			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "empresa_ID")
 	private Set<TrabalhadorEntity> trabalhadores;
 
-	@JsonIgnore
+	@JsonManagedReference
+	@XmlElement(name = "usuarios")
 	@ManyToMany(mappedBy = "empresasGerenciadas", fetch = FetchType.EAGER)
 	private Set<UsuarioEntity> usuarios;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.LAZY)
+			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "empresaFoto_ID")
 	private EmpresaFoto empresaFotoFachada;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.LAZY)
+			CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "empresaLogotipo_ID")
 	private EmpresaLogotipo empresaLogotipo;
 

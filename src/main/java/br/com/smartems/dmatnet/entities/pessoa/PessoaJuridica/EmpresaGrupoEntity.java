@@ -5,9 +5,14 @@ import java.lang.String;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 
+@XmlRootElement(name = "Grupo")
 @Entity
 @Table(name = "tbl_EmpresaGrupo")
 @NamedQueries({
@@ -21,9 +26,11 @@ public class EmpresaGrupoEntity implements Serializable {
 	private String nomeGrupo;
 	private String descricaoGrupo;
 
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "grupo")
 	private List<EmpresaEntity> empresas;
 
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name = "tbl_usuarioGruposEmpresas_joinTable", joinColumns = @JoinColumn(name = "usuario_ID"), inverseJoinColumns = @JoinColumn(name = "grupo_ID"))
 	private List<UsuarioEntity> usuarios;

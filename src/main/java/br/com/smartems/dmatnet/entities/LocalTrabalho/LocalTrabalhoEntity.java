@@ -14,10 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.FuncaoEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.Setor;
 
+@XmlRootElement(name = "LocaisTrabalho")
 @Entity
 @Table(name="tbl_LocalTrabalho")
 public class LocalTrabalhoEntity implements Serializable{
@@ -35,10 +39,12 @@ public class LocalTrabalhoEntity implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataFimValidade;
 	
+	@JsonManagedReference
 	@OneToMany(cascade={CascadeType.ALL})
 	@JoinColumn(name="empresa_ID")
 	private List<Setor> setores;
 	
+	@JsonManagedReference
 	@OneToMany(cascade={CascadeType.ALL})
 	@JoinColumn(name="empresa_ID")
 	private List<FuncaoEntity> funcoes;

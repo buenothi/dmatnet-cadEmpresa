@@ -13,9 +13,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisicaEntity;
 
+@XmlRootElement(name = "Trabalhadores")
 @Entity
 @Table(name = "tbl_trabalhador")
 public class TrabalhadorEntity extends AbstractPessoaFisicaEntity implements Serializable {

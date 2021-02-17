@@ -14,7 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisicaEntity;
@@ -22,6 +24,7 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaGrupoEntity;
 import br.com.smartems.dmatnet.util.CriptografiaString;
 
+@XmlRootElement(name = "Usuario")
 @Entity
 @Table(name="tbl_usuarios")
 @NamedQueries({
@@ -50,7 +53,7 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 		inverseJoinColumns=@JoinColumn(name="empresa_ID"))
 	private Set<EmpresaEntity> empresasGerenciadas;
 	
-	@JsonIgnore
+	@JsonBackReference
 	@ManyToMany(mappedBy="usuarios")
 	private List<EmpresaGrupoEntity> gruposGerenciados;
 	
