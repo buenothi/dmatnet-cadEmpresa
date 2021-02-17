@@ -2,6 +2,7 @@ package br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisicaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
@@ -37,17 +39,19 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 	private String login;
 	private String senha;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="usuarioGrupo_ID")
 	private UsuarioGrupoEntity grupo;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="tbl_usuarioEmpresas_joinTable",
 		joinColumns=@JoinColumn(name="usuario_ID"),
 		inverseJoinColumns=@JoinColumn(name="empresa_ID"))
-	private List<EmpresaEntity> empresasGerenciadas;
+	private Set<EmpresaEntity> empresasGerenciadas;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="usuarios")
 	private List<EmpresaGrupoEntity> gruposGerenciados;
 	
@@ -84,11 +88,11 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 		this.grupo = grupo;
 	}
 
-	public List<EmpresaEntity> getEmpresasGerenciadas() {
+	public Set<EmpresaEntity> getEmpresasGerenciadas() {
 		return empresasGerenciadas;
 	}
 
-	public void setEmpresasGerenciadas(List<EmpresaEntity> empresasGerenciadas) {
+	public void setEmpresasGerenciadas(Set<EmpresaEntity> empresasGerenciadas) {
 		this.empresasGerenciadas = empresasGerenciadas;
 	}
 

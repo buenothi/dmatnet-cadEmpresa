@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import org.hibernate.Hibernate;
+
 import br.com.smartems.dmatnet.Service.Impl.PessoaJuridicaFacade;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
@@ -32,6 +34,7 @@ public class EmpresaController {
 	@Path("/{id}")
 	public Response read(@PathParam("id") Long pk) {
 		EmpresaEntity empresa = pessoaJuridicaService.read(pk);
+		Hibernate.initialize(empresa);
 		return Response.ok(empresa).build();
 	}
 
@@ -52,8 +55,8 @@ public class EmpresaController {
 	}
 	
 	@GET
-	public List<EmpresaEntity> findAll() {
-		return pessoaJuridicaService.findAll();
+	public Response findAll() {
+		return Response.ok(pessoaJuridicaService.findAll()).build();
 	}
 
 	public List<EmpresaEntity> listarEmpresas(UsuarioEntity usuarioLogado) {

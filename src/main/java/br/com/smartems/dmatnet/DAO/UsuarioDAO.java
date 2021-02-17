@@ -80,7 +80,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioEntity, Long> {
 				usuario.setEnderecos(new HashSet<>());
 				usuario.getEnderecos().add(endereco);
 				try {
-					List<EmpresaEntity> setEmpresas = new ArrayList<EmpresaEntity>(empresasAtribuidas);
+					Set<EmpresaEntity> setEmpresas = new HashSet<EmpresaEntity>(empresasAtribuidas);
 					usuario.setEmpresasGerenciadas(setEmpresas);
 				} catch (NullPointerException npe) {
 					npe.printStackTrace();
@@ -148,7 +148,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioEntity, Long> {
 	private void atribuirEmpresasAtribuidasPessoaFisica(List<EmpresaEntity> empresasAtribuidas,
 			UsuarioEntity usuarioAtual) {
 		try {
-			List<EmpresaEntity> novoEmpresasAtribuidas = new ArrayList<EmpresaEntity>();
+			Set<EmpresaEntity> novoEmpresasAtribuidas = new HashSet<EmpresaEntity>();
 			novoEmpresasAtribuidas.addAll(empresasAtribuidas);
 			usuarioAtual.setEmpresasGerenciadas(novoEmpresasAtribuidas);
 		} catch (Exception e) {
