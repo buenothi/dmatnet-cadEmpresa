@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -46,10 +48,12 @@ public class EmpresaController {
 		return Response.created(location).build();
 	}
 	
+	@PUT
 	public EmpresaEntity update(EmpresaEntity entity) {
 		return pessoaJuridicaService.update(entity);
 	}
 
+	@DELETE
 	public void delete(EmpresaEntity entity) {
 		pessoaJuridicaService.delete(entity);
 	}
@@ -59,6 +63,7 @@ public class EmpresaController {
 		return Response.ok(pessoaJuridicaService.findAll()).build();
 	}
 
+	@GET
 	public List<EmpresaEntity> listarEmpresas(UsuarioEntity usuarioLogado) {
 		return pessoaJuridicaService.listarEmpresas(usuarioLogado);
 
