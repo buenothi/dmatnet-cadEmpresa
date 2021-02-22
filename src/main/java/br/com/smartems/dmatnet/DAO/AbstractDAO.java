@@ -2,13 +2,11 @@ package br.com.smartems.dmatnet.DAO;
 
 import java.util.List;
 
-import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
-@Dependent
 public abstract class AbstractDAO <T, PK> implements IAbstractDAO<T, PK>{
 
 	@PersistenceContext(unitName = "dmatnet-pu")

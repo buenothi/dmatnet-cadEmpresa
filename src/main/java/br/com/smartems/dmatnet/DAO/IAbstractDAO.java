@@ -1,5 +1,7 @@
 package br.com.smartems.dmatnet.DAO;
 
+import java.util.List;
+
 public interface IAbstractDAO<T, PK> {
 
 	void create(T t);
@@ -9,5 +11,7 @@ public interface IAbstractDAO<T, PK> {
 	T update(T t);
 
 	void delete(T t);
+	
+	List<T> findAll();
 
 }

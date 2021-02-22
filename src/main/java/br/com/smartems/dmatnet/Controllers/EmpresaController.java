@@ -20,7 +20,8 @@ import javax.ws.rs.core.UriInfo;
 
 import org.hibernate.Hibernate;
 
-import br.com.smartems.dmatnet.Service.Impl.PessoaJuridicaFacade;
+import br.com.smartems.dmatnet.DAO.IPessoaJuridicaDAO;
+import br.com.smartems.dmatnet.DAO.IUsuarioDAO;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 
@@ -30,8 +31,11 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 public class EmpresaController {
 
 	@Inject
-	private PessoaJuridicaFacade pessoaJuridicaService;
-	
+	private IPessoaJuridicaDAO pessoaJuridicaService;
+
+	@Inject
+	private IUsuarioDAO usuarioService;
+
 	@GET
 	@Path("/{id}")
 	public Response read(@PathParam("id") Long pk) {
@@ -47,7 +51,7 @@ public class EmpresaController {
 		URI location = uriBuilder.path("/{id}").build(entity.getIdPessoa());
 		return Response.created(location).build();
 	}
-	
+
 	@PUT
 	public EmpresaEntity update(EmpresaEntity entity) {
 		return pessoaJuridicaService.update(entity);
@@ -57,14 +61,16 @@ public class EmpresaController {
 	public void delete(EmpresaEntity entity) {
 		pessoaJuridicaService.delete(entity);
 	}
-	
+
 	@GET
 	public Response findAll() {
 		return Response.ok(pessoaJuridicaService.findAll()).build();
 	}
 
 	@GET
-	public List<EmpresaEntity> listarEmpresas(UsuarioEntity usuarioLogado) {
+	@Path("/porusuario/{id}")
+	public List<EmpresaEntity> listarEmpresas(@PathParam("id") Long pk) {
+		UsuarioEntity usuarioLogado = usuarioService.read(pk);
 		return pessoaJuridicaService.listarEmpresas(usuarioLogado);
 
 	}
