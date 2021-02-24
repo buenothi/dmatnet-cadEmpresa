@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,12 +24,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import br.com.smartems.dmatnet.entities.LocalTrabalho.LocalTrabalhoEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Trabalhador.TrabalhadorEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@XmlRootElement(name = "empresa")
+@XmlRootElement(name = "Empresa")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "tbl_Empresa")
 @NamedQueries({
 		@NamedQuery(name = "Empresa.listarEmpresasPorUsuario", query = "SELECT empresa FROM EmpresaEntity empresa inner join empresa.usuarioCriador usuario WHERE usuario.idPessoa in :idUsuario") })
+@Getter
+@Setter
+@NoArgsConstructor
 public class EmpresaEntity extends AbstractPessoaJuridicaEntity implements Serializable {
 
 	private long codESocialEmpresa;
@@ -75,86 +84,7 @@ public class EmpresaEntity extends AbstractPessoaJuridicaEntity implements Seria
 
 	private String tipoEstabelecimento;
 
+	@Getter
 	private static final long serialVersionUID = 1L;
-
-	public EmpresaEntity() {
-		super();
-	}
-
-	public long getCodESocialEmpresa() {
-		return this.codESocialEmpresa;
-	}
-
-	public void setCodESocialEmpresa(long codESocialEmpresa) {
-		this.codESocialEmpresa = codESocialEmpresa;
-	}
-
-	public EmpresaGrupoEntity getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(EmpresaGrupoEntity grupo) {
-		this.grupo = grupo;
-	}
-
-	public Set<EmpresaCadastroEntity> getCadastros() {
-		return cadastros;
-	}
-
-	public void setCadastros(Set<EmpresaCadastroEntity> cadastros) {
-		this.cadastros = cadastros;
-	}
-
-	public Set<LocalTrabalhoEntity> getLocais() {
-		return locais;
-	}
-
-	public void setLocais(Set<LocalTrabalhoEntity> locais) {
-		this.locais = locais;
-	}
-
-	public Set<TrabalhadorEntity> getTrabalhadores() {
-		return trabalhadores;
-	}
-
-	public void setTrabalhadores(Set<TrabalhadorEntity> trabalhadores) {
-		this.trabalhadores = trabalhadores;
-	}
-
-	public String getTipoEstabelecimento() {
-		return tipoEstabelecimento;
-	}
-
-	public void setTipoEstabelecimento(String tipoEstabelecimento) {
-		this.tipoEstabelecimento = tipoEstabelecimento;
-	}
-
-	public Set<UsuarioEntity> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<UsuarioEntity> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public EmpresaFoto getEmpresaFotoFachada() {
-		return empresaFotoFachada;
-	}
-
-	public void setEmpresaFotoFachada(EmpresaFoto empresaFotoFachada) {
-		this.empresaFotoFachada = empresaFotoFachada;
-	}
-
-	public EmpresaLogotipo getEmpresaLogotipo() {
-		return empresaLogotipo;
-	}
-
-	public void setEmpresaLogotipo(EmpresaLogotipo empresaLogotipo) {
-		this.empresaLogotipo = empresaLogotipo;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 }

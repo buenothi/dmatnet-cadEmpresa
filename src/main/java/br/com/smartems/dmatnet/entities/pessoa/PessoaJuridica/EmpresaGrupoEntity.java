@@ -1,16 +1,31 @@
 package br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @XmlRootElement(name = "Grupo")
 @Entity
@@ -18,6 +33,11 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntit
 @NamedQueries({
 		@NamedQuery(name = "EmpresaGrupo.listarGruposPorUsuario", query = "SELECT grupo FROM EmpresaGrupoEntity grupo "
 				+ "inner join grupo.usuarios usuario WHERE usuario.idPessoa in :idUsuario") })
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class EmpresaGrupoEntity implements Serializable {
 
 	@Id
@@ -36,75 +56,5 @@ public class EmpresaGrupoEntity implements Serializable {
 	private List<UsuarioEntity> usuarios;
 
 	private static final long serialVersionUID = 1L;
-
-	public EmpresaGrupoEntity() {
-		super();
-	}
-
-	public long getIdGrupo() {
-		return this.idGrupo;
-	}
-
-	public void setIdGrupo(long idGrupo) {
-		this.idGrupo = idGrupo;
-	}
-
-	public String getNomeGrupo() {
-		return this.nomeGrupo;
-	}
-
-	public void setNomeGrupo(String nomeGrupo) {
-		this.nomeGrupo = nomeGrupo.toUpperCase();
-	}
-
-	public String getDescricaoGrupo() {
-		return this.descricaoGrupo;
-	}
-
-	public void setDescricaoGrupo(String descricaoGrupo) {
-		this.descricaoGrupo = descricaoGrupo.toUpperCase();
-	}
-
-	public List<EmpresaEntity> getEmpresas() {
-		return empresas;
-	}
-
-	public void setEmpresas(List<EmpresaEntity> empresas) {
-		this.empresas = empresas;
-	}
-
-	public List<UsuarioEntity> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<UsuarioEntity> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (idGrupo ^ (idGrupo >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmpresaGrupoEntity other = (EmpresaGrupoEntity) obj;
-		if (idGrupo != other.idGrupo)
-			return false;
-		return true;
-	}
 
 }

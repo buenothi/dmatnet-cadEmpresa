@@ -1,10 +1,27 @@
 package br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Trabalhador;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="tbl_trabalhadorDeficiente")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class TrabalhadorDeficienteEntity implements Serializable {
 
 	@Id
@@ -24,81 +41,8 @@ public class TrabalhadorDeficienteEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	
-	public TrabalhadorDeficienteEntity() {
-		super();
-	}
-
-	public long getIdTrabalhador() {
-		return idPessoa;
-	}
-
-	public void setIdTrabalhador(long idPessoa) {
-		this.idPessoa = idPessoa;
-	}
-
-	public boolean isDefFisica() {
-		return defFisica;
-	}
-
-	public void setDefFisica(boolean defFisica) {
-		this.defFisica = defFisica;
-	}
-
-	public boolean isDefVisual() {
-		return defVisual;
-	}
-
-	public void setDefVisual(boolean defVisual) {
-		this.defVisual = defVisual;
-	}
-
-	public boolean isDefAuditiva() {
-		return defAuditiva;
-	}
-
-	public void setDefAuditiva(boolean defAuditiva) {
-		this.defAuditiva = defAuditiva;
-	}
-
-	public boolean isDefMental() {
-		return defMental;
-	}
-
-	public void setDefMental(boolean defMental) {
-		this.defMental = defMental;
-	}
-
-	public boolean isDefIntelectual() {
-		return defIntelectual;
-	}
-
-	public void setDefIntelectual(boolean defIntelectual) {
-		this.defIntelectual = defIntelectual;
-	}
-
-	public boolean isReabilitadoReadaptado() {
-		return reabilitadoReadaptado;
-	}
-
-	public void setReabilitadoReadaptado(boolean reabilitadoReadaptado) {
-		this.reabilitadoReadaptado = reabilitadoReadaptado;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao.toUpperCase();
-	}
-
-	public TrabalhadorCadastroEntity getTrabalhador() {
-		return trabalhador;
-	}
-
-	public void setTrabalhador(TrabalhadorCadastroEntity trabalhador) {
-		this.trabalhador = trabalhador;
 	}
 	
 }

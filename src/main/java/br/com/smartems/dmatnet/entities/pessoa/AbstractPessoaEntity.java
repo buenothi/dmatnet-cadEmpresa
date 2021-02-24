@@ -20,10 +20,18 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tbl_Pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = { "enderecos", "telefones", "emails", "dataCadastroPessoa", "usuarioCriador" })
 public abstract class AbstractPessoaEntity implements Serializable {
 
 	@Id
@@ -32,8 +40,7 @@ public abstract class AbstractPessoaEntity implements Serializable {
 
 	private String nome;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "PESSOA_ID")
 	private Set<EnderecoEntity> enderecos;
 
@@ -54,95 +61,9 @@ public abstract class AbstractPessoaEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public AbstractPessoaEntity() {
-		super();
-	}
-
-	public long getIdPessoa() {
-		return idPessoa;
-	}
-
-	public void setIdPessoa(long idPessoa) {
-		this.idPessoa = idPessoa;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome.toUpperCase();
-	}
-
-	public Set<EnderecoEntity> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(Set<EnderecoEntity> enderecos) {
-		this.enderecos = enderecos;
-	}
-
-	public Set<TelefoneEntity> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<TelefoneEntity> telefones) {
-		this.telefones = telefones;
-	}
-
-	public Set<EmailEntity> getEmails() {
-		return emails;
-	}
-
-	public void setEmails(Set<EmailEntity> emails) {
-		this.emails = emails;
-	}
-
-	public Date getDataCadastroPessoa() {
-		return dataCadastroPessoa;
-	}
-
-	public void setDataCadastroPessoa(Date dataCadastroPessoa) {
-		this.dataCadastroPessoa = dataCadastroPessoa;
-	}
-
-	public UsuarioEntity getUsuarioCriador() {
-		return usuarioCriador;
-	}
-
-	public void setUsuarioCriador(UsuarioEntity usuarioCriador) {
-		this.usuarioCriador = usuarioCriador;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public String toString() {
 		return "PessoaEntity [idPessoa=" + idPessoa + ", nome=" + nome + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (idPessoa ^ (idPessoa >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AbstractPessoaEntity other = (AbstractPessoaEntity) obj;
-		if (idPessoa != other.idPessoa)
-			return false;
-		return true;
 	}
 
 }

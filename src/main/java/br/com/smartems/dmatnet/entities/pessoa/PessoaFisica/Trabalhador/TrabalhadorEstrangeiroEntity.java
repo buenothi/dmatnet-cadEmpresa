@@ -3,10 +3,28 @@ package br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Trabalhador;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="tbl_trabalhadorEstrangeiro")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class TrabalhadorEstrangeiroEntity implements Serializable {
 
 	@Id
@@ -24,62 +42,5 @@ public class TrabalhadorEstrangeiroEntity implements Serializable {
 	private TrabalhadorCadastroEntity trabalhador;
 	
 	private static final long serialVersionUID = 1L;
-
-	
-	public TrabalhadorEstrangeiroEntity() {
-		super();
-	}
-
-	public long getIdTrabalhador() {
-		return idTrabalhador;
-	}
-
-	public void setIdTrabalhador(long idTrabalhador) {
-		this.idTrabalhador = idTrabalhador;
-	}
-
-	public Date getDataChegada() {
-		return dataChegada;
-	}
-
-	public void setDataChegada(Date dataChegada) {
-		this.dataChegada = dataChegada;
-	}
-
-	public int getCodClassTrabEstrangeiro() {
-		return codClassTrabEstrangeiro;
-	}
-
-	public void setCodClassTrabEstrangeiro(int codClassTrabEstrangeiro) {
-		this.codClassTrabEstrangeiro = codClassTrabEstrangeiro;
-	}
-
-	public boolean isCasadoBR() {
-		return casadoBR;
-	}
-
-	public void setCasadoBR(boolean casadoBR) {
-		this.casadoBR = casadoBR;
-	}
-
-	public boolean isFilhosBR() {
-		return filhosBR;
-	}
-
-	public void setFilhosBR(boolean filhosBR) {
-		this.filhosBR = filhosBR;
-	}
-
-	public TrabalhadorCadastroEntity getTrabalhador() {
-		return trabalhador;
-	}
-
-	public void setTrabalhador(TrabalhadorCadastroEntity trabalhador) {
-		this.trabalhador = trabalhador;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
 }

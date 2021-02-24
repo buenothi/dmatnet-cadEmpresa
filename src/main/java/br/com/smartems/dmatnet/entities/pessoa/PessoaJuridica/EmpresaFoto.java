@@ -9,8 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "tbl_EmpresaFoto")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class EmpresaFoto implements Serializable, Cloneable {
 
 	@Id
@@ -22,25 +33,6 @@ public class EmpresaFoto implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;
 
-	public EmpresaFoto() {
-	}
-
-	public long getIdEmpresaFoto() {
-		return idEmpresaFoto;
-	}
-
-	public void setIdEmpresaFoto(long idEmpresaFoto) {
-		this.idEmpresaFoto = idEmpresaFoto;
-	}
-
-	public byte[] getFotoFachada() {
-		return fotoFachada;
-	}
-
-	public void setFotoFachada(byte[] fotoFachada) {
-		this.fotoFachada = fotoFachada;
-	}
-
 	@Override
 	public EmpresaFoto clone() throws CloneNotSupportedException {
 		return (EmpresaFoto) super.clone();
@@ -48,28 +40,6 @@ public class EmpresaFoto implements Serializable, Cloneable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (idEmpresaFoto ^ (idEmpresaFoto >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmpresaFoto other = (EmpresaFoto) obj;
-		if (idEmpresaFoto != other.idEmpresaFoto)
-			return false;
-		return true;
 	}
 
 }

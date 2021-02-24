@@ -23,6 +23,9 @@ import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisica
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaEntity;
 import br.com.smartems.dmatnet.entities.pessoa.PessoaJuridica.EmpresaGrupoEntity;
 import br.com.smartems.dmatnet.util.CriptografiaString;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @XmlRootElement(name = "Usuario")
 @Entity
@@ -35,6 +38,9 @@ import br.com.smartems.dmatnet.util.CriptografiaString;
 	@NamedQuery(name="Usuario.listarUsuariosMaster", 
 			query="SELECT u, g FROM UsuarioEntity u, UsuarioGrupoEntity g WHERE g.nomeGrupo = 'MASTER'")
 })
+@Getter
+@Setter
+@NoArgsConstructor
 public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Serializable {
 
 	@Column(unique = true)
@@ -61,61 +67,9 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 
 	private static final long serialVersionUID = 1L;
 
-	public UsuarioEntity() {
-		super();
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
 	public void setSenha(String senha) {
 		CriptografiaString senhaCriptografada = new CriptografiaString();
 		this.senha = senhaCriptografada.obterHashString(senha);
-	}
-
-	public UsuarioGrupoEntity getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(UsuarioGrupoEntity grupo) {
-		this.grupo = grupo;
-	}
-
-	public Set<EmpresaEntity> getEmpresasGerenciadas() {
-		return empresasGerenciadas;
-	}
-
-	public void setEmpresasGerenciadas(Set<EmpresaEntity> empresasGerenciadas) {
-		this.empresasGerenciadas = empresasGerenciadas;
-	}
-
-	public Long getIdUsuarioPai() {
-		return idUsuarioPai;
-	}
-
-	public void setIdUsuarioPai(Long idUsuarioPai) {
-		this.idUsuarioPai = idUsuarioPai;
-	}
-
-	public List<EmpresaGrupoEntity> getGruposGerenciados() {
-		return gruposGerenciados;
-	}
-
-	public void setGruposGerenciados(List<EmpresaGrupoEntity> gruposGerenciados) {
-		this.gruposGerenciados = gruposGerenciados;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 }

@@ -53,7 +53,7 @@ public class PessoaJuridicaDAOImpl extends AbstractDAO<EmpresaEntity, Long> impl
 			if (empresa.getIdPessoa() == 0) {
 				empresa.setUsuarioCriador(usuarioLogado);
 				if (fotografiaFachada != null) {
-					empresa.setEmpresaFotoFachada(fotografiaFachada);
+					empresa.setEmpresaLogotipo(empresaLogotipo);
 				}
 				if (empresaLogotipo != null) {
 					empresa.setEmpresaLogotipo(empresaLogotipo);

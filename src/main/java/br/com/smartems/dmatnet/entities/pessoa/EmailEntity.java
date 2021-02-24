@@ -11,8 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tbl_email")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"tipoEmail", "isEmailPrincipal"})
 public class EmailEntity implements Serializable, Cloneable, Comparable<EmailEntity> {
 
 	@Id
@@ -29,83 +38,13 @@ public class EmailEntity implements Serializable, Cloneable, Comparable<EmailEnt
 	private EmailTipoEntity tipoEmail;
 	private static final long serialVersionUID = 1L;
 
-	public EmailEntity() {
-		super();
-	}
-
-	public long getIdEmail() {
-		return this.idEmail;
-	}
-
-	public void setIdEmail(long idEmail) {
-		this.idEmail = idEmail;
-	}
-
-	public String getNomeEmail() {
-		return this.nomeEmail;
-	}
-
 	public void setNomeEmail(String nomeEmail) {
 		this.nomeEmail = nomeEmail.toUpperCase();
 	}
-
-	public boolean isEmailPrincipal() {
-		return isEmailPrincipal;
-	}
-
-	public void setEmailPrincipal(boolean isEmailPrincipal) {
-		this.isEmailPrincipal = isEmailPrincipal;
-	}
-
-	public EmailTipoEntity getTipoEmail() {
-		return tipoEmail;
-	}
-
-	public void setTipoEmail(EmailTipoEntity tipoEmail) {
-		this.tipoEmail = tipoEmail;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	
 	@Override
 	protected EmailEntity clone() throws CloneNotSupportedException {
 		return (EmailEntity) super.clone();
-	}
-
-	@Override
-	public String toString() {
-		return "EmailEntity [nomeEmail=" + nomeEmail + ", tipoEmail=" + tipoEmail + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (idEmail ^ (idEmail >>> 32));
-		result = prime * result + ((nomeEmail == null) ? 0 : nomeEmail.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmailEntity other = (EmailEntity) obj;
-		if (idEmail != other.idEmail)
-			return false;
-		if (nomeEmail == null) {
-			if (other.nomeEmail != null)
-				return false;
-		} else if (!nomeEmail.equals(other.nomeEmail))
-			return false;
-		return true;
 	}
 
 	@Override

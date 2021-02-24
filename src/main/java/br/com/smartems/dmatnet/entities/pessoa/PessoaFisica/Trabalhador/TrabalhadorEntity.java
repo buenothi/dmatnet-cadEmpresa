@@ -16,10 +16,16 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisicaEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @XmlRootElement(name = "Trabalhadores")
 @Entity
 @Table(name = "tbl_trabalhador")
+@Getter
+@Setter
+@NoArgsConstructor
 public class TrabalhadorEntity extends AbstractPessoaFisicaEntity implements Serializable {
 
 	private long codESocialEmpregado;// código atribuído ao empregado para atendimento do eSocial
@@ -43,73 +49,5 @@ public class TrabalhadorEntity extends AbstractPessoaFisicaEntity implements Ser
 	private DeficienciaFisicaEntity deficienciaFisica;
 
 	private static final long serialVersionUID = 1L;
-
-	public TrabalhadorEntity() {
-		super();
-	}
-
-	public long getCodESocialEmpregado() {
-		return codESocialEmpregado;
-	}
-
-	public void setCodESocialEmpregado(long codESocialEmpregado) {
-		this.codESocialEmpregado = codESocialEmpregado;
-	}
-
-	public Date getDataAdmissao() {
-		return dataAdmissao;
-	}
-
-	public void setDataAdmissao(Date dataAdmissao) {
-		this.dataAdmissao = dataAdmissao;
-	}
-
-	public Date getDataDesligamento() {
-		return dataDesligamento;
-	}
-
-	public void setDataDesligamento(Date dataDesligamento) {
-		this.dataDesligamento = dataDesligamento;
-	}
-
-	public String getNomeMae() {
-		return nomeMae;
-	}
-
-	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
-	}
-
-	public String getNomePai() {
-		return nomePai;
-	}
-
-	public void setNomePai(String nomePai) {
-		this.nomePai = nomePai;
-	}
-
-	public int getGrauInstrucao() {
-		return grauInstrucao;
-	}
-
-	public void setGrauInstrucao(int grauInstrucao) {
-		this.grauInstrucao = grauInstrucao;
-	}
-
-	public List<TrabalhadorCadastroEntity> getCadastrosTrabalhador() {
-		return cadastrosTrabalhador;
-	}
-
-	public void setCadastrosTrabalhador(List<TrabalhadorCadastroEntity> cadastrosTrabalhador) {
-		this.cadastrosTrabalhador = cadastrosTrabalhador;
-	}
-
-	public DeficienciaFisicaEntity getDeficienciaFisica() {
-		return deficienciaFisica;
-	}
-
-	public void setDeficienciaFisica(DeficienciaFisicaEntity deficienciaFisica) {
-		this.deficienciaFisica = deficienciaFisica;
-	}
 
 }
