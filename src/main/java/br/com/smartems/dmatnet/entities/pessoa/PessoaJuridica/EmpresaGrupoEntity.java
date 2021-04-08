@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.Usuario.UsuarioEntity;
 import lombok.EqualsAndHashCode;
@@ -50,7 +50,7 @@ public class EmpresaGrupoEntity implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "grupo")
 	private List<EmpresaEntity> empresas;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "tbl_usuarioGruposEmpresas_joinTable", joinColumns = @JoinColumn(name = "usuario_ID"), inverseJoinColumns = @JoinColumn(name = "grupo_ID"))
 	private List<UsuarioEntity> usuarios;

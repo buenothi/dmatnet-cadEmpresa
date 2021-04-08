@@ -16,7 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.smartems.dmatnet.entities.pessoa.PessoaFisica.AbstractPessoaFisicaEntity;
@@ -59,7 +58,7 @@ public class UsuarioEntity extends AbstractPessoaFisicaEntity implements Seriali
 		inverseJoinColumns=@JoinColumn(name="empresa_ID"))
 	private Set<EmpresaEntity> empresasGerenciadas;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy="usuarios")
 	private List<EmpresaGrupoEntity> gruposGerenciados;
 	
